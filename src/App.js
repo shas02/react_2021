@@ -1,10 +1,17 @@
 import './App.css';
 
 
+
 function App() {
     return (
-        <div className="App">
-
+        <div>
+            <div>
+                <Users/>
+            </div>
+            <h1></h1>
+            <div>
+                <Posts/>
+            </div>
         </div>
     );
 }
