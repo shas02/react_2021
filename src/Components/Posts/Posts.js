@@ -6,6 +6,7 @@ export default function Posts() {
 
     let [posts, setPosts] = useState([])
     let [singlePost, setSinglePost] = useState([])
+
     useEffect(() => {
         axiosInstance.get('/posts').then(value => setPosts([...value.data]))
     })
@@ -24,7 +25,13 @@ export default function Posts() {
             </div>
             <div className={'single_user_box'}>
                 {
-                    singlePost && (<h4>{singlePost.body}</h4>)
+                    singlePost && (
+                        <div>
+                            <h4>User id: {singlePost.userId}</h4>
+                            <h4>{singlePost.title}</h4>
+                            <p>{singlePost.body}</p>
+                        </div>
+                    )
                 }
             </div>
         </div>

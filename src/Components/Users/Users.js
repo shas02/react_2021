@@ -7,6 +7,7 @@ export default function Users() {
 
     let [users, setUsers] = useState([]);
 let [singleUser, setSingleUser] = useState([])
+
     useEffect(() => {
         axiosInstance.get('/users').then(value => setUsers([...value.data]))
     }, [])
