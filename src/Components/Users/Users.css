@@ -1,0 +1,15 @@
+.wrap {
+    display: flex;
+}
+
+.users_box {
+    width: fit-content;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.single_user_box {
+    width: fit-content;
+    border: 1px solid black;
+    padding: 10px;
+}

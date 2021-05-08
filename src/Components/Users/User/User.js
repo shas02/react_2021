@@ -1,9 +1,9 @@
-export default function User({item}) {
+export default function User({item, search}) {
     return (
         <div>
-            {item.id}
+            {item.id}.
             {item.name}
-            <button>Details</button>
+            <button onClick={() => search(item.id) }>Details</button>
         </div>
     )
 }
