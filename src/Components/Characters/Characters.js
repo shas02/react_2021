@@ -11,25 +11,29 @@ export default function Characters(props) {
 
     let [characters, setCharacters] = useState([]);
 
+    const normalizationData = (data) => {
+        const normalizeData = [];
+
+        data.map(character => {
+            Array.isArray(character)
+                ? normalizeData.push(character[0])
+                : normalizeData.push(character)
+        })
+        return normalizeData;
+    }
+
     useEffect(() => {
         fetch('https://api.sampleapis.com/futurama/characters')
             .then(value => value.json())
-            .then(value => {
-                setCharacters([...value])
-            });
+            .then(value => normalizationData(value))
+            .then(value => setCharacters([...value]));
     }, [])
-
-    console.log(characters);
 
     return (
         <div>
             {
-                characters.map(value => <Character key={value.id} item={value} url={url}/>)
+                characters.map((value, i) => <Character key={i} item={value} url={url}/>)
             }
-
-            <Switch>
-                {/*<Route path={'/Characters/:id'} component={CharacterDetails}/>*/}
-            </Switch>
         </div>
     );
 }
