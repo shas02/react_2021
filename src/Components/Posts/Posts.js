@@ -1,32 +1,57 @@
-import {useEffect, useState} from "react";
+import {useEffect, useReducer, useState} from "react";
 import Post from "./Post/Post";
 import {Switch, Route} from "react-router-dom";
 import PostDetails from "./Post/PostDetails/PostDetails";
 
-export default function Posts(props) {
+function reducer(state, action) {
+    switch (action.type) {
+        case 'GET_POSTS':
+            return {...state, posts: action.payload};
+        case 'CHOOSE_POST':
+            return {...state, post: action.payload};
 
-    let {match: {url}} = props;
+        default :
+            return {...state};
 
-    let [posts, setPosts] = useState([]);
+    }
+}
+
+export default function Posts() {
+
+    let [state, dispatch] = useReducer(reducer, {posts: [], post: {}});
+    let {posts, post} = state;
     useEffect(() => {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then(value => value.json())
             .then(value => {
-                setPosts([...value])
+                dispatch({type: 'GET_POSTS', payload: value});
             });
     }, []);
 
+    let choosePost = (id) => {
+        let find = posts.find(value => value.id == id);
+        // setPost(find);
+        dispatch({type: 'CHOOSE_POST', payload: find});
+    };
+
     return (
         <div>
+
             {
-                posts.map(value => <Post key={value.id} item={value} url={url}/>)
+                post && <div>{post.body}</div>
+
+
+            }
+            <hr/>
+            {
+                posts.map(value => {
+                    return <div key={value.id}>{value.id} - {value.title}
+                        <button onClick={() => choosePost(value.id)}>choose</button>
+
+                    </div>;
+                })
             }
 
-            <Switch>
-                {/*<Route path={'/Posts/:id'} component={PostDetails}/>*/}
-            </Switch>
         </div>
-
-
     );
 }

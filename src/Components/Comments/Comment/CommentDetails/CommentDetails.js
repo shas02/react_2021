@@ -2,15 +2,20 @@ import {useEffect, useState} from "react";
 
 export default function CommentDetails(props) {
 
-    let {match: {params: {id}}} = props;
+    let {match: {params:{id}}, location:{state}} = props;
     let [comment, setComment] = useState(null)
+
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/comments/' + id)
-            .then(value => value.json())
-            .then(value => {
-                setComment(value)
-            });
-    }, [comment]);
+        setComment(state)
+    }, [id])
+
+    // useEffect(() => {
+    //     fetch('https://jsonplaceholder.typicode.com/comments/' + id)
+    //         .then(value => value.json())
+    //         .then(value => {
+    //             setComment(value)
+    //         });
+    // }, [id]);
 
     return (
         <div>

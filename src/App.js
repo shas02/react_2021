@@ -9,13 +9,24 @@ import Comments from "./Components/Comments/Comments";
 import UserDetails from "./Components/Users/User/UserDetails/UserDetails";
 import PostDetails from "./Components/Posts/Post/PostDetails/PostDetails";
 import CommentDetails from "./Components/Comments/Comment/CommentDetails/CommentDetails";
+import Parent from "./Components/Parent";
+import {createContext} from "react";
 
+export let Mycontext = createContext('some text from context')
 
 function App() {
+
 
     return (
         <Router>
             <div>
+
+                <Mycontext.Provider value={'some text from App component'}>
+                    <Parent/>
+                </Mycontext.Provider>
+                <hr/>
+
+
                 <Link to={'/'}>Home page</Link>
                 <br/>
                 <Link to={'/Users'}>Users</Link>

@@ -7,7 +7,7 @@ export default function Post(props) {
     return (
         <div>
             {item.id}. {item.title}
-            <Link to={url + '/' + item.id}> Open post details</Link>
+            <Link to={{pathname: `${url}/${item.id}`, state: item}}> Open post details</Link>
         </div>
     );
 }

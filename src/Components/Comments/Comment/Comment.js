@@ -6,7 +6,7 @@ export default function Comment(props) {
     return (
         <div>
             {item.id}. {item.name}
-            <Link to={url + '/' + item.id}> Show comment details</Link>
+            <Link to={{pathname: `${url}/${item.id}`, state: item}}> Show comment details</Link>
         </div>
     );
 }
