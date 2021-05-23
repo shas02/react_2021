@@ -44,10 +44,17 @@ const Counter = () => {
 }
 
 function App() {
+  
+    const [isOn, setIsOn] = React.useState(true);
+
+
     return (
         <div className="App">
-            <Counter/>
-
+            {isOn && <Counter/>}
+            <button onClick={() => {
+            setIsOn(prev => !prev)
+            }
+            }>toggle</button>
         </div>
     );
 }
